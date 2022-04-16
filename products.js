@@ -79,7 +79,21 @@ var data = [
     var price = document.createElement("P");
     price.innerText = ele.price;
     var but = document.createElement('button');
-    but.innerText = "add to cart"
+    but.innerText = "add to cart";
+
+    but.addEventListener('click', function() {
+        cartData.push(data);
+          console.log(cartData);
+          alert("item added successfuly to cart");
+          localStorage.setItem('cartData', JSON.stringify(cartData));
+      });
+    
+
+
+
+
+
+
 
 
     var box = document.createElement('div');
@@ -94,16 +108,30 @@ var data = [
   })
 
 
-  function phl(){
-    data.sort(function (a,b){
-        return a.price - b.price;
-    });
-  }
-  function plh(){
-    data.sort(function (a,b){
+//   function phl(){
+//     data.sort(function (a,b){
+//         return a.price - b.price;
+//     });
+//   }
+//   function plh(){
+//     data.sort(function (a,b){
+//         return b.price - a.price;
+//     });
+//   }
+//    var  alldata  = JSON.parse(JSON.stringify(data));
+
+   var data = JSON.parse(JSON.stringify(data));
+  document.querySelector('#sortInput').addEventListener('change', function() {
+    var sortType = document.querySelector('#sortInput').value;
+    if(sortType === 'none') {
+      displayData(data);
+    } else {
+      filteredData.sort(function(a, b) {
+        if(sortType === 'lowToHigh') {
+          return a.price - b.price;
+        } 
         return b.price - a.price;
-    });
-  }
-
-
-  document.getElementById("htl").addEventListener("click",plh)
+      });
+      displayData(filteredData);
+    }
+  });
