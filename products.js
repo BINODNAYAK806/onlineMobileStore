@@ -132,6 +132,8 @@ var data = [
         } 
         return b.price - a.price;
       });
-      displayData(filteredData);
+      displayData(data);
     }
   });
+
+
